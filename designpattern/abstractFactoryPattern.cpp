@@ -44,10 +44,16 @@ class EmptyCase : public Transportation{
 
 };
 
-class TransportationTerminal{
+class Terminal{
     
     public:
-      Transportation* transfortation(string tr){
+      virtual Transportation* transfortation(string tr) const = 0;
+};
+
+class TransportationTerminal : public Terminal{
+    
+    public:
+      Transportation* transfortation(string tr)const override{
         if(tr=="BUS") return (new Bus())->transfer();
         else if(tr=="CAR")return (new Car())->transfer();
         else return (new EmptyCase())->transfer();
